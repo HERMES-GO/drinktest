@@ -3,65 +3,39 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>인공지능이 나에게 추천하는 음료는?</title>
-<link href="https://fonts.googleapis.com/css2?family=Jua:wght@400&family=Gowun+Dodum&family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<title>감각적인 AI 심리테스트 - 오늘의 나만의 음료 🍹</title>
+<link href="https://fonts.googleapis.com/css2?family=Jua:wght@400&family=Gowun+Dodum&display=swap" rel="stylesheet">
 <style>
+/* ============ THEME ============ */
 :root{
   --ink:#eef2ff; --muted:#b8c0ff; --accent:#7cf5d2; --accent2:#8ea0ff; --line:rgba(255,255,255,.14);
-  --pad:clamp(12px, 3.8vw, 22px); --btnH:clamp(52px, 7.2vh, 64px);
+  --pad:clamp(14px, 3.5vw, 22px); --btnH:clamp(52px, 7vh, 64px);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{
   margin:0; color:var(--ink);
   font-family:'Gowun Dodum','Noto Sans KR',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  background:#0f1023; min-height:100%; overflow-x:hidden;
+  background:#0f1023;
+  min-height:100%; overflow-x:hidden;
+  background: #0f1023 url('imgs/bg.png') center/cover no-repeat fixed;
 }
-body.page-intro{ background: #0f1023 url('imgs/bg_intro_halloween.png') center/cover no-repeat fixed; }
-body.page-quiz{ background: #0f1023 url('imgs/bg_quiz.svg') center/cover no-repeat fixed; }
-body.page-result{ background: #0f1023 url('imgs/bg_result.svg') center/cover no-repeat fixed; }
+/* soft overlay */
 body::after{ content:''; position:fixed; inset:0; pointer-events:none;
   background: radial-gradient(1200px 600px at 50% -200px, rgba(124,245,210,.10), rgba(0,0,0,0)),
               linear-gradient(180deg, rgba(0,0,0,.36), rgba(0,0,0,.24) 40%, rgba(0,0,0,.36));
 }
-@media (max-width: 768px){
-  body.page-intro, body.page-quiz, body.page-result { background-attachment: scroll; }
-}
 
-.brand-band{position:fixed;left:0;right:0;top:0;z-index:30;
-  padding:calc(6px + env(safe-area-inset-top)) 10px 6px; display:flex; align-items:center; justify-content:space-between;
-  pointer-events:none;
-}
-.brand{pointer-events:auto; font-family:'Nanum Pen Script', cursive; letter-spacing:.2px;
-  font-size:clamp(15px,4.2vw,19px); padding:6px 12px; border-radius:16px;
-  background:rgba(255,255,255,.10); border:1px dashed rgba(255,255,255,.35); color:#f3f6ff;
-  transform:rotate(-1.5deg);
-  box-shadow:0 8px 20px rgba(0,0,0,.22), inset 0 0 0 2px rgba(255,255,255,.05);
-}
-.brand.right{transform:rotate(1.5deg);}
-.footer-tag{position:fixed; left:50%; transform:translateX(-50%); bottom:calc(10px + env(safe-area-inset-bottom)); z-index:30;
-  pointer-events:none;
-}
-.footer-chip{pointer-events:auto; font-family:'Nanum Pen Script', cursive; letter-spacing:.2px;
-  font-size:clamp(15px,4.2vw,19px); padding:8px 16px; border-radius:16px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2)); color:#0b1030; font-weight:900;
-  box-shadow:0 10px 22px rgba(124,245,210,.28);
-  border:0; transform:rotate(0.5deg);
-}
+/* Card shells */
+.wrap{max-width:780px;margin:0 auto;padding:calc(var(--pad) + env(safe-area-inset-top)) var(--pad) calc(var(--pad) + env(safe-area-inset-bottom))}
+.card{background:rgba(23,25,54,0.68);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:22px;padding:var(--pad);box-shadow:0 12px 28px rgba(0,0,0,.35)}
 
-.wrap{max-width:780px;margin:0 auto;padding:calc(44px + var(--pad) + env(safe-area-inset-top)) var(--pad) calc(60px + var(--pad) + env(safe-area-inset-bottom))}
-.card{position:relative;background:rgba(23,25,54,0.68);backdrop-filter:blur(8px);border:1px solid var(--line);border-radius:22px;padding:var(--pad);box-shadow:0 12px 28px rgba(0,0,0,.35)}
-.card::before{content:'';position:absolute;inset:0;border-radius:22px;pointer-events:none;
-  background:
-    radial-gradient(12px 12px at 14% 18%, rgba(124,245,210,.18) 0 40%, transparent 41%) ,
-    radial-gradient(10px 10px at 86% 78%, rgba(142,160,255,.16) 0 40%, transparent 41%);
-  mix-blend-mode:screen; opacity:.65;
-}
-
-.h-title{font-family:'Jua',sans-serif;text-align:center;line-height:1.15;
-  font-size:clamp(26px,6.2vw,40px);letter-spacing:.2px;margin:.1rem 0 .75rem}
+/* Fancy title */
+.h-title{font-family:'Jua',sans-serif;text-align:center;line-height:1.1;
+  font-size:clamp(26px,6.2vw,40px);letter-spacing:.3px;margin:.1rem 0 .75rem}
 .h-sub{color:#cfd5ff;font-size:clamp(13px,3.8vw,16px);text-align:center;margin:-4px 0 12px}
 
+/* Intro hero */
 .hero{display:grid;gap:14px;justify-items:center;padding:10px 6px 6px}
 .hero-badges{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .badge{border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#dfe3ff;border-radius:999px;padding:7px 10px;font-weight:700;font-size:clamp(12px,3.6vw,14px)}
@@ -81,6 +55,7 @@ body::after{ content:''; position:fixed; inset:0; pointer-events:none;
 .small{font-size:clamp(12px,3.6vw,14px);color:var(--muted)}
 .hidden{display:none}
 
+/* Result styling */
 .result{display:grid;grid-template-columns:1fr;gap:18px;align-items:start}
 .pill{display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border:1px solid rgba(124,245,210,.4);background:rgba(124,245,210,.12);border-radius:999px;color:var(--accent);font-weight:900;font-size:clamp(13px,3.6vw,15px)}
 .title{font-family:'Jua',sans-serif;font-size:clamp(22px,6vw,34px);font-weight:900;margin:.35rem 0 .6rem;text-align:center}
@@ -94,36 +69,29 @@ body::after{ content:''; position:fixed; inset:0; pointer-events:none;
 .ar{width:100%;max-width:440px;aspect-ratio:1/1;border-radius:16px;overflow:hidden;background:#0f1023}
 .ar img{width:100%;height:100%;object-fit:contain;image-rendering:auto}
 
+/* Bouncy micro animation for CTA */
 @keyframes floaty{0%{transform:translateY(0)}50%{transform:translateY(-3px)}100%{transform:translateY(0)}}
 .floaty{animation:floaty 2.4s ease-in-out infinite}
 @media (prefers-reduced-motion: reduce){.btn,.bar,.floaty{transition:none;animation:none}}
 </style>
 </head>
 <body class="page-intro">
-<div class="brand-band">
-  <div class="brand left">대원고</div>
-  <div class="brand right">메에페</div>
-</div>
-<div class="footer-tag">
-  <div class="footer-chip">쿠킹클래스</div>
-</div>
-
 <div class="wrap">
   <div class="card" id="intro">
-    <h1 class="h-title">인공지능이 나에게 추천하는<br/>음료는?</h1>
-    <p class="h-sub">4개의 질문으로 오늘의 무드에 딱 맞는<br/>음료를 추천해드려요! 🍹</p>
+    <h1 class="h-title">감각적인 AI 심리테스트 🍹</h1>
+    <p class="h-sub">4개의 질문으로 오늘의 무드에 딱 맞는 음료를 추천해드려요!</p>
     <section class="hero">
       <div class="hero-badges">
-        <span class="badge">메에페</span>
-        <span class="badge">쿠킹클래스</span>
-        <span class="badge">인공지능</span>
+        <span class="badge">모바일 최적화</span>
+        <span class="badge">1분 컷</span>
+        <span class="badge">감성 디자인</span>
       </div>
       <button id="start" class="btn btn-cta floaty">시작하기</button>
     </section>
   </div>
 
   <div class="card hidden" id="quizCard">
-    <h2 class="h-title">인공지능이 나에게 추천하는<br/>음료는?</h2>
+    <h2 class="h-title">AI가 고른 오늘의 나만의 음료</h2>
     <div class="progress" role="progressbar" aria-label="진행률"><div id="bar" class="bar"></div></div>
 
     <div id="quiz" aria-live="polite">
@@ -163,11 +131,12 @@ body::after{ content:''; position:fixed; inset:0; pointer-events:none;
 </div>
 
 <script>
+// ---------- DATA ----------
 const questions = [
-  { text:'Q1. 오늘의 나의 컨디션은? 🌞😌', A:'에너지가 넘쳐! 뭔가 하고 싶어! ⚡', B:'차분히 쉬고 싶어. 🛋️' },
-  { text:'Q2. 축제나 수업 시간에 나는 주로 어디에 있을까? 🎉📚', A:'사람들 많은 곳에서 신나게! 🕺', B:'조용한 공간에서 혼자만의 시간. 🤫' },
-  { text:'Q3. 간식 고를 때, 나는 어떤 맛에 더 손이 가? 🍭🍋', A:'달달한 게 최고! 🍫', B:'새콤상큼한 게 좋아! 🍊' },
-  { text:'Q4. 처음 보는 부스나 활동이 있으면 어떻게 해? 🚀🏡', A:'모험가! 새로운 건 다 해봐야지! 🧭', B:'익숙하고 안정적인 게 좋아! 🧸' }
+  { text:'Q1. 오늘의 나의 컨디션은?', A:'에너지가 넘쳐! 뭔가 하고 싶어!', B:'차분히 쉬고 싶어.' },
+  { text:'Q2. 축제나 수업 시간에 나는 주로 어디에 있을까?', A:'사람들 많은 곳에서 신나게!', B:'조용한 공간에서 혼자만의 시간.' },
+  { text:'Q3. 간식 고를 때, 나는 어떤 맛에 더 손이 가?', A:'달달한 게 최고 🍭', B:'새콤상큼한 게 좋아 🍋' },
+  { text:'Q4. 처음 보는 부스나 활동이 있으면 어떻게 해?', A:'모험가! 새로운 건 다 해봐야지 🚀', B:'익숙하고 안정적인 게 좋아 🏡' }
 ];
 const R = (title, drink, img, recipeLine) => ({
   title, drink, img,
@@ -197,6 +166,7 @@ const results = {
   'BBBB': R('조용히 논리와 지성을 추구하는 나!','청포도 아이스티',IMG+'16_grape_tea.png','아이스티 30ml + 청포도시럽 15ml + 물 180ml + 얼음')
 };
 
+// ---------- STATE & DOM ----------
 let idx=0, picks=[];
 const body=document.body;
 const intro=document.getElementById('intro');
@@ -214,6 +184,7 @@ const title=document.getElementById('title');
 const desc=document.getElementById('desc');
 const drinkImg=document.getElementById('drinkImg');
 
+// ---------- RENDERERS ----------
 function setPage(page){
   body.classList.remove('page-intro','page-quiz','page-result');
   body.classList.add('page-'+page);
@@ -262,14 +233,18 @@ function showResult(){
   drinkImg.alt=r.drink+' 카드 이미지';
   window.scrollTo({top:0, behavior:'smooth'});
 }
-function resetAll(){ showIntro(); }
+function resetAll(){
+  showIntro();
+}
 
+// ---------- EVENTS ----------
 startBtn.addEventListener('click', showQuiz);
 btnA.addEventListener('click',()=>choose('A'));
 btnB.addEventListener('click',()=>choose('B'));
 restartTop.addEventListener('click', resetAll);
 restart.addEventListener('click', resetAll);
 
+// init
 showIntro();
 </script>
 </body>
